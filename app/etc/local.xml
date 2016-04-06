@@ -28,10 +28,10 @@
 <config>
     <global>
         <install>
-            <date><![CDATA[Wed, 06 Apr 2016 14:13:26 +0000]]></date>
+            <date><![CDATA[Wed, 06 Apr 2016 14:36:30 +0000]]></date>
         </install>
         <crypt>
-            <key><![CDATA[ae6a9b089a8de56a049e24db15330db0]]></key>
+            <key><![CDATA[f2508e93217e0e51b0f53474ec4fae1a]]></key>
         </crypt>
         <disable_local_modules>false</disable_local_modules>
         <resources>
@@ -43,7 +43,7 @@
                     <host><![CDATA[localhost]]></host>
                     <username><![CDATA[root]]></username>
                     <password><![CDATA[]]></password>
-                    <dbname><![CDATA[magento.telesign]]></dbname>
+                    <dbname><![CDATA[telesign]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
                     <type><![CDATA[pdo_mysql]]></type>
