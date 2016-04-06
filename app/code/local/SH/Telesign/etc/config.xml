@@ -24,6 +24,9 @@
             <sh_telesign>
                 <class>SH_Telesign_Helper</class>
             </sh_telesign>
+            <sh_customer>
+                <class>SH_Telesign_Helper_Customer</class>
+            </sh_customer>
         </helpers>
         <resources>
             <sh_telesign_setup>
@@ -32,6 +35,42 @@
                 </setup>
             </sh_telesign_setup>
         </resources>
+        <events>
+            <customer_register_success>
+                <observers>
+                    <sh_telesign>
+                        <type>singleton</type>
+                        <class>SH_Telesign_Model_Customer_Observer</class>
+                        <method>sendCustomerNotificationViaTelesignAfterRegister</method>
+                    </sh_telesign>
+                </observers>
+            </customer_register_success>
+            <controller_action_predispatch>
+                <observers>
+                    <sh_telesign>
+                        <type>singleton</type>
+                        <class>SH_Telesign_Model_Customer_Observer</class>
+                        <method>hookToControllerActionPreDispatch</method>
+                    </sh_telesign>
+                </observers>
+            </controller_action_predispatch>
+            <check_telesign_confirmation_before_login>
+                <observers>
+                    <itransition_escrow>
+                        <class>SH_Telesign_Model_Customer_Observer</class>
+                        <method>checkTelesignConfirmationBeforeLogin</method>
+                    </itransition_escrow>
+                </observers>
+            </check_telesign_confirmation_before_login>
+            <customer_login>
+                <observers>
+                    <itransition_escrow>
+                        <class>SH_Telesign_Model_Customer_Observer</class>
+                        <method>checkTelesignConfirmationBeforeLogin</method>
+                    </itransition_escrow>
+                </observers>
+            </customer_login>
+        </events>
     </global>
     <adminhtml>
         <translate>
