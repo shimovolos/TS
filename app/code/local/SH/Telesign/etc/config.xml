@@ -36,6 +36,12 @@
                     <sh_telesign_telephone_base>
                         <table>sh_telesign_telephone_base</table>
                     </sh_telesign_telephone_base>
+                    <sh_telesign_transactions>
+                        <table>sh_telesign_transactions</table>
+                    </sh_telesign_transactions>
+                    <sh_telesign_risk>
+                        <table>sh_telesign_risk</table>
+                    </sh_telesign_risk>
                 </entities>
             </sh_telesign_resource>
         </models>

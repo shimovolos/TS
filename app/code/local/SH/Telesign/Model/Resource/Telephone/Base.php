@@ -8,7 +8,7 @@ class SH_Telesign_Model_Resource_Telephone_Base extends Mage_Core_Model_Resource
 
     protected function _construct()
     {
-        $this->_init('sh_telesign/sh_telesign_telephone_base', 'sh_telesign_telephone_base_id');
+        $this->_init('sh_telesign/sh_telesign_telephone_base', 'entity_id');
     }
 
 }
