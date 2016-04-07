@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <customer_account_create>
+        <block type="customer/form_register" name="customer_form_register" template="persistent/customer/form/register.phtml">
+            <action method="setShowAddressFields">
+                <param>true</param>
+            </action>
+            <block type="customer/form_register" name="customer.form.register.telesign.address.full" template="persistent/customer/form/address/full.phtml"/>
+            <block type="customer/form_register" name="customer.form.register.telesign.address.telephone" template="persistent/customer/form/address/telephone.phtml"/>
+            <block type="customer/form_register" name="customer.form.register.telesign.type" template="persistent/customer/form/telesign/type.phtml"/>
+        </block>
+    </customer_account_create>
+</layout>

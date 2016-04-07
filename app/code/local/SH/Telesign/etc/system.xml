@@ -15,12 +15,42 @@
             <show_in_store>1</show_in_store>
             <sort_order>0</sort_order>
             <groups>
+                <general translate="label" module="sh_telesign">
+                    <label>General</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>0</sort_order>
+                    <expanded>1</expanded>
+                    <fields>
+                        <notification_type translate="label" module="sh_telesign">
+                            <label>Telesign notification type</label>
+                            <validate>required-entry</validate>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>sh_telesign/system_config_source_type_notification</source_model>
+                        </notification_type>
+                        <telephone_from_address translate="label" module="sh_telesign">
+                            <label>Get default Telephone from address</label>
+                            <validate>required-entry</validate>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>sh_telesign/system_config_source_type_address</source_model>
+                        </telephone_from_address>
+                    </fields>
+                </general>
                 <enablings translate="label" module="sh_telesign">
                     <label>Enable Telesign Module</label>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
-                    <sort_order>0</sort_order>
+                    <sort_order>1</sort_order>
                     <expanded>1</expanded>
                     <fields>
                         <customer_register translate="label" module="sh_telesign">
@@ -65,6 +95,47 @@
                         </guest_checkout>
                     </fields>
                 </enablings>
+                <register_page_settings translate="label" module="sh_telesign">
+                    <label>Register Page Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>3</sort_order>
+                    <expanded>1</expanded>
+                    <fields>
+                        <enable_address_on_register translate="label" module="sh_telesign">
+                            <label>Enable Address on Register Page</label>
+                            <validate>required-entry</validate>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enable_address_on_register>
+                        <customer_register_address_type translate="label" module="sh_telesign">
+                            <label>Telesign Address Type During Registration</label>
+                            <validate>required-entry</validate>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>sh_telesign/system_config_source_type_register</source_model>
+                        </customer_register_address_type>
+                        <front_telephone_parsing translate="label" module="sh_telesign">
+                            <label>Telephone validation</label>
+                            <validate>required-entry</validate>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Enable telephone validation based on selected country (Only if Address Type equals Full Address)</comment>
+                        </front_telephone_parsing>
+                    </fields>
+                </register_page_settings>
             </groups>
         </sh_telesign_settings>
     </sections>

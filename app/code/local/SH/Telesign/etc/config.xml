@@ -2,9 +2,28 @@
 <config>
     <modules>
         <SH_Telesign>
-            <version>0.1.1</version>
+            <version>0.1.2</version>
         </SH_Telesign>
     </modules>
+    <frontend>
+        <routers>
+            <escrow>
+                <use>standard</use>
+                <args>
+                    <module>SH_Telesign</module>
+                    <frontName>sh_telesign</frontName>
+                </args>
+            </escrow>
+            <design>
+                <package>
+                    <name>rwd</name>
+                </package>
+                <theme>
+                    <default>sh_telesign</default>
+                </theme>
+            </design>
+        </routers>
+    </frontend>
     <global>
         <models>
             <sh_telesign>
@@ -13,6 +32,11 @@
             </sh_telesign>
             <sh_telesign_resource>
                 <class>SH_Telesign_Model_Resource</class>
+                <entities>
+                    <sh_telesign_telephone_base>
+                        <table>sh_telesign_telephone_base</table>
+                    </sh_telesign_telephone_base>
+                </entities>
             </sh_telesign_resource>
         </models>
         <blocks>
@@ -75,11 +99,11 @@
     <adminhtml>
         <translate>
             <modules>
-                <SH_Tireon>
+                <sh_telesign>
                     <files>
                         <default>SH_Telesign.csv</default>
                     </files>
-                </SH_Tireon>
+                </sh_telesign>
             </modules>
         </translate>
     </adminhtml>
