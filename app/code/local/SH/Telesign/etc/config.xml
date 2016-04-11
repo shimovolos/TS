@@ -7,13 +7,13 @@
     </modules>
     <frontend>
         <routers>
-            <escrow>
+            <sh_telesign>
                 <use>standard</use>
                 <args>
                     <module>SH_Telesign</module>
                     <frontName>sh_telesign</frontName>
                 </args>
-            </escrow>
+            </sh_telesign>
             <design>
                 <package>
                     <name>rwd</name>
@@ -86,18 +86,18 @@
             </controller_action_predispatch>
             <check_telesign_confirmation_before_login>
                 <observers>
-                    <itransition_escrow>
+                    <sh_telesign>
                         <class>SH_Telesign_Model_Customer_Observer</class>
                         <method>checkTelesignConfirmationBeforeLogin</method>
-                    </itransition_escrow>
+                    </sh_telesign>
                 </observers>
             </check_telesign_confirmation_before_login>
             <customer_login>
                 <observers>
-                    <itransition_escrow>
+                    <sh_telesign>
                         <class>SH_Telesign_Model_Customer_Observer</class>
                         <method>checkTelesignConfirmationBeforeLogin</method>
-                    </itransition_escrow>
+                    </sh_telesign>
                 </observers>
             </customer_login>
         </events>

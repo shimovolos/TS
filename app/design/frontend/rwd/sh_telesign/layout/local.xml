@@ -10,4 +10,19 @@
             <block type="customer/form_register" name="customer.form.register.telesign.type" template="persistent/customer/form/telesign/type.phtml"/>
         </block>
     </customer_account_create>
+    <sh_telesign_verify_index>
+        <update handle="page_one_column"/>
+        <reference name="content">
+            <block type="sh_telesign/verify" name="telesign.verify.code" template="customer/address/telesign/verify.phtml"/>
+        </reference>
+    </sh_telesign_verify_index>
+    <sh_telesign_verify_resendform>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/default.js</name></action>
+        </reference>
+        <update handle="page_one_column"/>
+        <reference name="content">
+            <block type="sh_telesign/resend" name="telesign.resend.verify.code.form" template="customer/address/telesign/resend.phtml"/>
+        </reference>
+    </sh_telesign_verify_resendform>
 </layout>

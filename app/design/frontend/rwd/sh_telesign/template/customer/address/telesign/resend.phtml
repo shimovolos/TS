@@ -1,0 +1,28 @@
+<?php /* @var $this SH_Telesign_Block_Verify*/?>
+<form id="resend_code_form" action="<?php echo $this->getUrl('sh_telesign/verify/resendCode'); ?>">
+    <div class="fieldset">
+        <h2 class="legend"><?php echo $this->__('Resend Verify Code') ?></h2>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field">
+                    <div class="input-box">
+                        <input type="radio" name="verify_code_telephone" value="0" checked="checked"/><?php echo $this->__('Notify me to the registered telephone') ?><br/>
+                        <input type="radio" name="verify_code_telephone" value="1"/><?php echo $this->__('Notify me to the new telephone') ?>
+                    </div>
+                    <div class="input-box" style="display: none" id="verify_code_new_telephone_div">
+                        <label for="verify_code_telephone" class="required"><em>*</em><?php echo $this->__('New Telephone') ?></label><br/>
+                        <input type="text" name="verify_code_new_telephone" id="verify_code_new_telephone" title="<?php echo $this->__('New Telephone') ?>" class="input-text required-entry" disabled/>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <p style="font-size: smaller" class="required"><?php echo $this->__('* Please note: If you enter new telephone - this telephone will be set as default'); ?></p>
+    </div>
+    <div class="buttons-set">
+        <button type="submit" title="<?php echo $this->__('Submit') ?>" class="button"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+    var resendCoreForm= new VarienForm('resend_code_form', true);
+    resendFormChangeTelephone('verify_code_telephone', jQuery('#verify_code_new_telephone'), jQuery('#verify_code_new_telephone_div'));
+</script>
