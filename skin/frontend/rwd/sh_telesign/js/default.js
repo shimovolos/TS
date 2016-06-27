@@ -1,7 +1,6 @@
 var $j = jQuery.noConflict();
 
 function resendFormChangeTelephone(radioSelector, telephoneSelector, telephoneDiv) {
-    console.log($j('#' + radioSelector));
     $j('input[type=radio][name=' + radioSelector + ']').on('change', function() {
       if(this.value == 1) {
           telephoneDiv.show();
@@ -9,6 +8,18 @@ function resendFormChangeTelephone(radioSelector, telephoneSelector, telephoneDi
       } else {
           telephoneDiv.hide();
           telephoneSelector.prop('disabled', true);
+      }
+  });
+}
+
+function enterVerificationCode(radioSelector, codeSelector, codeDiv) {
+    $j('input[type=radio][name=' + radioSelector + ']').on('change', function() {
+      if(this.value == 0) {
+          codeDiv.show();
+          codeSelector.prop('disabled', false);
+      } else {
+          codeDiv.hide();
+          codeSelector.prop('disabled', true);
       }
   });
 }

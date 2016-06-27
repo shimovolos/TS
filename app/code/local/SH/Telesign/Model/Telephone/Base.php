@@ -19,14 +19,11 @@ class SH_Telesign_Model_Telephone_Base extends Mage_Core_Model_Abstract
     {
         $exist = false;
 
-        /** @var $telesignTelephoneBase SH_Telesign_Model_Telephone_Base */
-        $telesignTelephoneBase = Mage::getModel('sh_telesign/telephone_base');
         /** @var $telesignTelephoneBaseCollection SH_Telesign_Model_Resource_Telephone_Base_Collection */
-        $telesignTelephoneBaseCollection = $telesignTelephoneBase
-            ->getCollection()
+        $telesignTelephoneBaseCollection = $this->getCollection()
             ->addFieldToFilter('telephone', array('eq' => $telephone));
 
-        if($telesignTelephoneBaseCollection->getSize() > 0) {
+        if($telesignTelephoneBaseCollection->count() > 0) {
             $exist = true;
         }
 

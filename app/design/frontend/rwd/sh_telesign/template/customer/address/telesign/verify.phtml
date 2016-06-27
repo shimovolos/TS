@@ -1,26 +1,24 @@
-<?php /* @var $this SH_Telesign_Block_Verify*/?>
-<form action="<?php echo $this->getUrl('sh_telesign/verify/check'); ?>">
-    <div class="fieldset">
-        <h2 class="legend"><?php echo $this->__('Registration Verify Code') ?></h2>
-        <ul class="form-list">
-            <li class="fields">
-                <div class="field">
-                    <label for="verify_code" class="required"><em>*</em><?php echo $this->__('Code') ?></label>
-                    <div class="input-box">
-                        <input type="text" name="verify_code" id="verify_code" title="<?php echo $this->__('Code') ?>" class="input-text required-entry" />
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+<?php /* @var $this SH_Telesign_Block_Verify */ ?>
+<li>
+    <div class="field">
+        <div class="input-box">
+            <input type="radio" name="verify_code_already_send" value="0" checked="checked"/><?php echo $this->__('Enter the correct telephone verification code') ?><br/>
+            <input type="radio" name="verify_code_already_send" value="1"/><?php echo $this->__('I already enter the correct telephone verification code') ?>
+        </div>
+        <div class="input-box" id="verify_code_telephone_div">
+            <label for="verify_code" class="required"><em>*</em><?php echo $this->__('Telephone Code') ?></label>
+
+            <div class="input-box">
+                <input type="text" name="verify_code" id="verify_code" title="<?php echo $this->__('Code') ?>"
+                       class="input-text required-entry"/>
+            </div>
+        </div>
     </div>
-    <div class="buttons-set">
-        <button type="submit" title="<?php echo $this->__('Submit') ?>" class="button"><span><span><?php echo $this->__('Submit') ?></span></span></button>
-    </div>
-</form>
-<div style="float: right; margin-top: 10px">
-    <a href="<?php echo Mage::getUrl('sh_telesign/verify/resendForm');?>"><button class="button wk_mp_btn" title="<?php echo $this->__('Resend Verify Code') ?>" type="submit" id="save_butn" >
-            <span><span><?php echo $this->__('Resend Verify Code') ?></span></span>
-        </button>
-    </a>
-</div>
+</li>
+<li>
+    <a href="<?php echo $this->getUrl('sh_telesign/verify/resendForm'); ?>"
+       class="f-left"><?php echo $this->__('Resend Telephone Verification Code') ?></a>
+</li>
+<script type="text/javascript">
+    enterVerificationCode('verify_code_already_send', jQuery('#verify_code'), jQuery('#verify_code_telephone_div'));
+</script>

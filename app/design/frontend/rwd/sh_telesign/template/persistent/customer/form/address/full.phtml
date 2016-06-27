@@ -5,15 +5,29 @@
     </li>
     <li class="fields">
         <div class="field">
-            <label for="company"><?php echo $this->__('Company') ?></label>
+            <label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
             <div class="input-box">
-                <input type="text" name="company" id="company" value="<?php echo $this->escapeHtml($this->getFormData()->getCompany()) ?>" title="<?php echo $this->quoteEscape($this->__('Company')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('company') ?>" />
+                <?php echo $this->getCountryHtmlSelect() ?>
             </div>
         </div>
         <div class="field">
-            <label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+            <label for="region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
             <div class="input-box">
-                <input type="tel" name="telephone" id="telephone" value="<?php echo $this->escapeHtml($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->quoteEscape($this->__('Telephone')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" />
+                <select id="region_id" name="region_id" title="<?php echo $this->quoteEscape($this->__('State/Province')) ?>" class="validate-select" style="display:none;">
+                    <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                </select>
+                <script type="text/javascript">
+                    //<![CDATA[
+                    $('region_id').setAttribute('defaultValue', "<?php echo $this->getFormData()->getRegionId() ?>");
+                    //]]>
+                </script>
+                <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($this->getRegion()) ?>" title="<?php echo $this->quoteEscape($this->__('State/Province')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>" style="display:none;" />
+            </div>
+        </div>
+        <div class="field">
+            <label for="city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+            <div class="input-box">
+                <input type="text" name="city" value="<?php echo $this->escapeHtml($this->getFormData()->getCity()) ?>" title="<?php echo $this->quoteEscape($this->__('City')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="city" />
             </div>
         </div>
     </li>
@@ -35,42 +49,58 @@
     <?php endfor; ?>
     <li class="fields">
         <div class="field">
-            <label for="city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
-            <div class="input-box">
-                <input type="text" name="city" value="<?php echo $this->escapeHtml($this->getFormData()->getCity()) ?>" title="<?php echo $this->quoteEscape($this->__('City')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="city" />
-            </div>
-        </div>
-        <div class="field">
-            <label for="region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
-            <div class="input-box">
-                <select id="region_id" name="region_id" title="<?php echo $this->quoteEscape($this->__('State/Province')) ?>" class="validate-select" style="display:none;">
-                    <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
-                </select>
-                <script type="text/javascript">
-                    //<![CDATA[
-                    $('region_id').setAttribute('defaultValue', "<?php echo $this->getFormData()->getRegionId() ?>");
-                    //]]>
-                </script>
-                <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($this->getRegion()) ?>" title="<?php echo $this->quoteEscape($this->__('State/Province')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>" style="display:none;" />
-            </div>
-        </div>
-    </li>
-    <li class="fields">
-        <div class="field">
             <label for="zip" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
             <div class="input-box">
                 <input type="text" name="postcode" value="<?php echo $this->escapeHtml($this->getFormData()->getPostcode()) ?>" title="<?php echo $this->quoteEscape($this->__('Zip/Postal Code')) ?>" id="zip" class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
             </div>
         </div>
+    </li>
+    <li class="fields">
         <div class="field">
-            <label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+            <label for="company"><?php echo $this->__('Company') ?></label>
             <div class="input-box">
-                <?php echo $this->getCountryHtmlSelect() ?>
+                <input type="text" name="company" id="company" value="<?php echo $this->escapeHtml($this->getFormData()->getCompany()) ?>" title="<?php echo $this->quoteEscape($this->__('Company')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('company') ?>" />
+            </div>
+        </div>
+        <div class="field">
+            <label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+            <div class="input-box">
+                <input type="tel" name="telephone" id="telephone" value="<?php echo $this->escapeHtml($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->quoteEscape($this->__('Telephone')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" />
             </div>
         </div>
     </li>
-    <li class="hidden">
-        <input type="hidden" name="default_billing" value="1" />
-        <input type="hidden" name="default_shipping" value="1" />
+    <li class="fields">
+        <?php if(Mage::helper('sh_telesign')->addressTypeForTelephone() == 'shipping') :?>
+            <input type="hidden" name="default_billing" value="1" />
+            <input type="hidden" name="default_shipping" value="1" />
+        <?php elseif(Mage::helper('sh_telesign')->addressTypeForTelephone() == 'billing'): ?>
+            <input type="hidden" name="default_billing" value="1" />
+            <input type="checkbox" name="default_shipping" value="1" /> <?php echo $this->__('Shipping address same as billing') ?>
+        <?php endif;?>
     </li>
+    <?php if(Mage::helper('sh_telesign')->frontendTelephoneValidation()): ?>
+        <script type="text/javascript">
+            var $j = jQuery.noConflict();
+
+            $j(function ($j) {
+                $j('#country').on('change', function(){
+                    initMasks('country', 'telephone', $j);
+                });
+                initMasks('country', 'telephone', $j);
+
+                function loadCode(el){
+                    if(!el.val()) el.val(el.attr('data-val'));
+                }
+
+                function removeCode(el){
+                    if(el.val() == el.attr('data-val')) el.val('');
+                }
+                $j('#telephone').on('focusin', function(){loadCode($j('#telephone'))}).on('focusout', function(){removeCode($j('#telephone'))});
+
+            });
+        </script>
+    <?php endif;?>
+<?php elseif(Mage::helper('sh_telesign')->isTelesignEnableOnRegister()): ?>
+    <?php echo $this->getChildHtml('customer.form.register.telesign.address.telephone'); ?>
 <?php endif; ?>
+

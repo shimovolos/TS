@@ -22,6 +22,13 @@
                     <default>sh_telesign</default>
                 </theme>
             </design>
+            <customer>
+                <args>
+                    <modules>
+                        <sh_telesign before="-">SH_Telesign</sh_telesign>
+                    </modules>
+                </args>
+            </customer>
         </routers>
     </frontend>
     <global>
@@ -57,6 +64,12 @@
             <sh_customer>
                 <class>SH_Telesign_Helper_Customer</class>
             </sh_customer>
+            <sh_messages>
+                <class>SH_Telesign_Helper_Messages</class>
+            </sh_messages>
+            <sh_verify>
+                <class>SH_Telesign_Helper_Verify</class>
+            </sh_verify>
         </helpers>
         <resources>
             <sh_telesign_setup>
@@ -71,7 +84,7 @@
                     <sh_telesign>
                         <type>singleton</type>
                         <class>SH_Telesign_Model_Customer_Observer</class>
-                        <method>sendCustomerNotificationViaTelesignAfterRegister</method>
+                        <method>enableTelesignVerificationAfterRegister</method>
                     </sh_telesign>
                 </observers>
             </customer_register_success>

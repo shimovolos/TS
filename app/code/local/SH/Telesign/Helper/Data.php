@@ -75,6 +75,12 @@ class SH_Telesign_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function frontendTelephoneValidation()
     {
-        return Mage::getStoreConfig('sh_telesign_settings/register_page_settings/front_telephone_parsing');
+        $validation = false;
+
+        if($this->isFullAddressDuringRegistration()) {
+            $validation = Mage::getStoreConfig('sh_telesign_settings/register_page_settings/front_telephone_parsing');
+        }
+
+        return $validation;
     }
 }

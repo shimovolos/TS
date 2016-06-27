@@ -49,4 +49,52 @@ class SH_Telesign_Helper_Customer extends Mage_Core_Helper_Abstract
 
         return $customerDefaultAddress;
     }
+
+    /**
+     * Set telesign values to customer session
+     * @param $request
+     */
+    public function setCustomerSessionWithTelesign($request)
+    {
+        $session = $this->getCurrentCustomerSession();
+
+        $session->unsetData('telephone');
+        $session->unsetData('telesign_notification_type');
+        $session->unsetData('telesign_notification_type_label');
+
+        $telephone = $request->getParam('telephone');
+        $telesignType = $request->getParam('telesign_type');
+        $session->setData('telesign_notification_type', $telesignType);
+
+        $notifications = new SH_Telesign_Model_System_Config_Source_Type_Notification();
+        $notificationsArray = $notifications->toArray();
+        $session->setData('telesign_notification_type_label', $notificationsArray[$telesignType]);
+
+        if (empty($telephone)) {
+            $message = Mage::helper('sh_telesign/messages')->errorEmptyTelephone();
+            $this->telephoneValidationError($message);
+        } else {
+            $session->setData('telephone', $telephone);
+        }
+    }
+
+    /**
+     * Redirect to previous page with notification, that Telephone field is Required
+     * @param $message
+     */
+    public function telephoneValidationError($message)
+    {
+        $errUrl = Mage::getUrl('*/*/create', array('_secure' => true));
+        $errorUrl = Mage::app()->getRequest()->getParam(Mage_Core_Controller_Varien_Action::PARAM_NAME_ERROR_URL);
+        if (empty($errorUrl)) {
+            $errorUrl = $errUrl;
+        }
+
+        Mage::app()->getFrontController()->getAction()
+            ->setFlag(Mage::app()->getRequest()->getActionName(), Mage_Core_Controller_Varien_Action::FLAG_NO_DISPATCH, true);
+
+        Mage::app()->getResponse()->setRedirect($errorUrl);
+        Mage::getSingleton('core/session')->addError(Mage::helper('sh_telesign')->__($message));
+        return;
+    }
 }
