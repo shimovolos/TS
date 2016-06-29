@@ -12,6 +12,10 @@
                                         <title>Settings</title>
                                         <sort_order>0</sort_order>
                                     </sh_telesign_settings>
+                                    <sh_telesign_api translate="title">
+                                        <title>Settings</title>
+                                        <sort_order>1</sort_order>
+                                    </sh_telesign_api>
                                 </children>
                             </config>
                         </children>

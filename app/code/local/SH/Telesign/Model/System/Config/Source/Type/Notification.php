@@ -5,6 +5,11 @@
  */
 class SH_Telesign_Model_System_Config_Source_Type_Notification
 {
+    const TELESIGN_TYPE_SMS = 0;
+    const TELESIGN_TYPE_CALL = 1;
+    const TELESIGN_TYPE_BOTH = 2;
+    const TELESIGN_TYPE_PHONE_VERIFICATION = 3;
+
     /**
      * Options getter
      *
@@ -13,9 +18,9 @@ class SH_Telesign_Model_System_Config_Source_Type_Notification
     public function toOptionArray()
     {
         return array(
-            array('value' => 0, 'label' => Mage::helper('sh_telesign')->__('SMS')),
-            array('value' => 1, 'label' => Mage::helper('sh_telesign')->__('Call')),
-            array('value' => 2, 'label' => Mage::helper('sh_telesign')->__('Both types')),
+            array('value' => self::TELESIGN_TYPE_SMS, 'label' => Mage::helper('sh_telesign')->__('SMS')),
+            array('value' => self::TELESIGN_TYPE_CALL, 'label' => Mage::helper('sh_telesign')->__('Call')),
+            array('value' => self::TELESIGN_TYPE_BOTH, 'label' => Mage::helper('sh_telesign')->__('Both types')),
         );
     }
 
@@ -27,9 +32,9 @@ class SH_Telesign_Model_System_Config_Source_Type_Notification
     public function toArray()
     {
         return array(
-            0 => Mage::helper('sh_telesign')->__('SMS'),
-            1 => Mage::helper('sh_telesign')->__('Call'),
-            2 => Mage::helper('sh_telesign')->__('Both types'),
+            self::TELESIGN_TYPE_SMS => Mage::helper('sh_telesign')->__('SMS'),
+            self::TELESIGN_TYPE_CALL => Mage::helper('sh_telesign')->__('Call'),
+            self::TELESIGN_TYPE_BOTH => Mage::helper('sh_telesign')->__('Both types'),
         );
     }
 
@@ -42,13 +47,13 @@ class SH_Telesign_Model_System_Config_Source_Type_Notification
         $optionArray = $this->toArray();
         $currentNotificationTypeArray = array();
 
-        if($currentNotificationType == 2) {
-            unset($optionArray[2]);
+        if($currentNotificationType == self::TELESIGN_TYPE_BOTH) {
+            unset($optionArray[self::TELESIGN_TYPE_BOTH]);
             $currentNotificationTypeArray = $optionArray;
-        } elseif($currentNotificationType == 1) {
-            $currentNotificationTypeArray[] = $optionArray[1];
-        } elseif($currentNotificationType == 0) {
-            $currentNotificationTypeArray[] = $optionArray[0];
+        } elseif($currentNotificationType == self::TELESIGN_TYPE_CALL) {
+            $currentNotificationTypeArray[] = $optionArray[self::TELESIGN_TYPE_CALL];
+        } elseif($currentNotificationType == self::TELESIGN_TYPE_SMS) {
+            $currentNotificationTypeArray[] = $optionArray[self::TELESIGN_TYPE_SMS];
         }
 
         return $currentNotificationTypeArray;
