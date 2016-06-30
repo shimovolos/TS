@@ -81,8 +81,3 @@ $mageRunCode = isset($_SERVER['MAGE_RUN_CODE']) ? $_SERVER['MAGE_RUN_CODE'] : ''
 $mageRunType = isset($_SERVER['MAGE_RUN_TYPE']) ? $_SERVER['MAGE_RUN_TYPE'] : 'store';
 
 Mage::run($mageRunCode, $mageRunType);
-$o = new Varien_Object();
-$verify = Mage::getModel('sh_telesign/telesign_verify', $o);
-$response = $verify->sms('375298823384', 999999);
-$status = $verify->status($response, 999999);
-var_dump($status);

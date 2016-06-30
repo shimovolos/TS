@@ -49,14 +49,6 @@ class SH_Telesign_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * @return mixed
      */
-    public function isEnableAddressOnRegisterPage()
-    {
-        return Mage::getStoreConfig('sh_telesign_settings/register_page_settings/enable_address_on_register');
-    }
-
-    /**
-     * @return mixed
-     */
     public function isFullAddressDuringRegistration()
     {
         return Mage::getStoreConfig('sh_telesign_settings/register_page_settings/customer_register_address_type');
