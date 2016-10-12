@@ -70,6 +70,12 @@
             <sh_verify>
                 <class>SH_Telesign_Helper_Verify</class>
             </sh_verify>
+            <api_settings>
+                <class>SH_Telesign_Helper_Api_Settings</class>
+            </api_settings>
+            <api_languages>
+                <class>SH_Telesign_Helper_Api_Languages</class>
+            </api_languages>
         </helpers>
         <resources>
             <sh_telesign_setup>
@@ -126,4 +132,14 @@
             </modules>
         </translate>
     </adminhtml>
+    <default>
+        <sh_telesign_api>
+            <sms_settings>
+                <use_default_message>1</use_default_message>
+            </sms_settings>
+            <call_settings>
+                <use_default_tts_message>1</use_default_tts_message>
+            </call_settings>
+        </sh_telesign_api>
+    </default>
 </config>

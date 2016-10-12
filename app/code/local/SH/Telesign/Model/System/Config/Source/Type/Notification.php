@@ -20,7 +20,7 @@ class SH_Telesign_Model_System_Config_Source_Type_Notification
         return array(
             array('value' => self::TELESIGN_TYPE_SMS, 'label' => Mage::helper('sh_telesign')->__('SMS')),
             array('value' => self::TELESIGN_TYPE_CALL, 'label' => Mage::helper('sh_telesign')->__('Call')),
-            array('value' => self::TELESIGN_TYPE_BOTH, 'label' => Mage::helper('sh_telesign')->__('Both types')),
+            array('value' => self::TELESIGN_TYPE_BOTH, 'label' => Mage::helper('sh_telesign')->__('Available Both types')),
         );
     }
 
@@ -34,7 +34,7 @@ class SH_Telesign_Model_System_Config_Source_Type_Notification
         return array(
             self::TELESIGN_TYPE_SMS => Mage::helper('sh_telesign')->__('SMS'),
             self::TELESIGN_TYPE_CALL => Mage::helper('sh_telesign')->__('Call'),
-            self::TELESIGN_TYPE_BOTH => Mage::helper('sh_telesign')->__('Both types'),
+            self::TELESIGN_TYPE_BOTH => Mage::helper('sh_telesign')->__('Available Both types'),
         );
     }
 
@@ -51,9 +51,9 @@ class SH_Telesign_Model_System_Config_Source_Type_Notification
             unset($optionArray[self::TELESIGN_TYPE_BOTH]);
             $currentNotificationTypeArray = $optionArray;
         } elseif($currentNotificationType == self::TELESIGN_TYPE_CALL) {
-            $currentNotificationTypeArray[] = $optionArray[self::TELESIGN_TYPE_CALL];
+            $currentNotificationTypeArray[self::TELESIGN_TYPE_CALL] = $optionArray[self::TELESIGN_TYPE_CALL];
         } elseif($currentNotificationType == self::TELESIGN_TYPE_SMS) {
-            $currentNotificationTypeArray[] = $optionArray[self::TELESIGN_TYPE_SMS];
+            $currentNotificationTypeArray[self::TELESIGN_TYPE_SMS] = $optionArray[self::TELESIGN_TYPE_SMS];
         }
 
         return $currentNotificationTypeArray;

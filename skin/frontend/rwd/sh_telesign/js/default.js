@@ -23,3 +23,18 @@ function enterVerificationCode(radioSelector, codeSelector, codeDiv) {
       }
   });
 }
+
+function simpleAjaxRequest(url, data, responseSelector) {
+    $j.ajax({
+        url: url,
+        data: data,
+        type: "POST",
+        success: function (response) {
+            if(responseSelector) {
+                responseSelector.append(response);
+            } else {
+                return response;
+            }
+        }
+    });
+}

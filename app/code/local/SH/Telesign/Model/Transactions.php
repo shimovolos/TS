@@ -46,9 +46,9 @@ class SH_Telesign_Model_Transactions extends Mage_Core_Model_Abstract
      * @var array
      */
     protected $smsCodes = array(
-        200 => 'Delivered to handset. SMS has been delivered to the user’s phone.',
+        200 => 'Delivered to handset. SMS has been delivered to the user\'s phone.',
         203 => 'Delivered to gateway. SMS has been delivered to the gateway. If the gateway responds with further information (including successful delivery to handset or delivery failure), the status is updated.',
-        207 => 'Error delivering SMS to handset (reason unknown). SMS could not be delivered to the user’s handset for an unknown reason.',
+        207 => 'Error delivering SMS to handset (reason unknown). SMS could not be delivered to the user\'s handset for an unknown reason.',
         210 => 'Temporary phone error. SMS could not be delivered to the handset due to a temporary error with the phone. Examples: phone is turned off, not enough memory to store the message.',
         211 => 'Permanent phone error. SMS could not be delivered to the handset due to a permanent error with the phone. For example, phone is incompatible with SMS, or phone is illegally registered on the network.',
         220 => 'Gateway/network cannot route message. Network cannot route the message to the handset. This can happen when a phone number is blacklisted on the network or is not a valid phone number.',
@@ -151,14 +151,12 @@ class SH_Telesign_Model_Transactions extends Mage_Core_Model_Abstract
     }
 
     /**
-     * @param $response
+     * @param $code - $response['status']['code']
      * @param $type
      * @return mixed
      */
-    public function getTransactionMsg($response, $type)
+    public function getTransactionMsg($code, $type)
     {
-        $code = $response['status']['code'];
-
         if (!empty($code)) {
             if($type == SH_Telesign_Model_System_Config_Source_Type_Notification::TELESIGN_TYPE_PHONE_VERIFICATION) {
                 $this->message = $this->transCodes[$code];

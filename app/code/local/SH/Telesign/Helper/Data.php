@@ -17,9 +17,9 @@ class SH_Telesign_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * @return mixed
      */
-    public function isTelesignEnableOnEditAddress()
+    public function isEnableAddressOnRegisterPage()
     {
-        return Mage::getStoreConfig('sh_telesign_settings/enablings/customer_edit_address');
+        return Mage::getStoreConfig('sh_telesign_settings/register_page_settings/enable_address_on_register');
     }
 
     /**

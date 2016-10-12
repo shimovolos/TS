@@ -1,0 +1,11 @@
+<?php
+$notificationLanguages = Mage::helper('sh_telesign/api_languages')->language($this->getData('notificationType'));
+?>
+<label for="telesign_message_language" class="telesign_message_language"><?php echo $this->__('Notification Language') ?></label>
+<div class="input-box telesign_message_language">
+    <select id="telesign_message_language" name="telesign_message_language" title="<?php echo $this->quoteEscape($this->__('Notification Language')) ?>" class="validate-select">
+        <?php foreach($notificationLanguages as $language => $code): ?>
+            <option value="<?php echo $code;?>" <?php echo ($code == 'en') ? 'selected=selected' : ''; ?>><?php echo $language?></option>
+        <?php endforeach; ?>
+    </select>
+</div>

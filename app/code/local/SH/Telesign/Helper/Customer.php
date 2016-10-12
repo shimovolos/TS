@@ -61,10 +61,13 @@ class SH_Telesign_Helper_Customer extends Mage_Core_Helper_Abstract
         $session->unsetData('telephone');
         $session->unsetData('telesign_notification_type');
         $session->unsetData('telesign_notification_type_label');
+        $session->unsetData('telesign_message_language');
 
         $telephone = $request->getParam('telephone');
         $telesignType = $request->getParam('telesign_type');
+        
         $session->setData('telesign_notification_type', $telesignType);
+        $session->setData('telesign_message_language', $request->getParam('telesign_message_language'));
 
         $notifications = new SH_Telesign_Model_System_Config_Source_Type_Notification();
         $notificationsArray = $notifications->toArray();

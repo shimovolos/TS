@@ -4,6 +4,7 @@
         <reference name="head">
             <action method="addItem"><type>skin_js</type><name>js/phone.js</name></action>
             <action method="addItem"><type>skin_js</type><name>js/jquery.maskedinput.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/default.js</name></action>
         </reference>
         <block type="customer/form_register" name="customer_form_register" template="persistent/customer/form/register.phtml">
             <action method="setShowAddressFields">
@@ -13,7 +14,9 @@
                 <block type="customer/form_register" name="customer.form.register.telesign.address.telephone" template="persistent/customer/form/address/telephone.phtml"/>
             </block>
             <block type="customer/form_register" name="customer.form.register.telesign.address.telephone" template="persistent/customer/form/address/telephone.phtml"/>
-            <block type="customer/form_register" name="customer.form.register.telesign.type" template="persistent/customer/form/telesign/type.phtml"/>
+            <block type="customer/form_register" name="customer.form.register.telesign.type" template="persistent/customer/form/telesign/type.phtml">
+                <block type="sh_telesign/language" name="customer.form.register.telesign.language" template="persistent/customer/form/telesign/language.phtml"/>
+            </block>
         </block>
     </customer_account_create>
     <sh_telesign_verify_resendform>

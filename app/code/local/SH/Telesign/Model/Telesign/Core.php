@@ -68,8 +68,8 @@ class SH_Telesign_Model_Telesign_Core extends Mage_Core_Model_Abstract
     public function __construct(Varien_Object $params)
     {
 
-        $this->customerId = Mage::getStoreConfig('sh_telesign_api/settings/customer_id');
-        $this->secretKey = base64_decode(Mage::getStoreConfig('sh_telesign_api/settings/key'));
+        $this->customerId = Mage::helper('sh_telesign/api_settings')->apiCustomerId();
+        $this->secretKey = base64_decode(Mage::helper('sh_telesign/api_settings')->apiRestKey());
 
         $this->authMethod = $params->getData('auth_method') ? $params->getData('auth_method') : self::TELESIGN_AUTH_METHOD;
         $this->apiUrl = $params->getData('api_url') ? $params->getData('api_url') : self::TELESIGN_API_URL;

@@ -2,7 +2,7 @@
 $notificationTypes = new SH_Telesign_Model_System_Config_Source_Type_Notification();
 ?>
 <li class="fields">
-    <div class="field">
+    <div class="field" id="notification_both_types_language">
         <label for="telesign_type" class="required"><em>*</em><?php echo $this->__('Notification Type') ?></label>
         <div class="input-box">
             <select id="telesign_type" name="telesign_type" title="<?php echo $this->quoteEscape($this->__('Notification Type')) ?>" class="validate-select">
@@ -11,5 +11,21 @@ $notificationTypes = new SH_Telesign_Model_System_Config_Source_Type_Notificatio
                 <?php endforeach; ?>
             </select>
         </div>
+        <?php
+            if(count($notificationTypes->getCurrentNotificationType()) < 2) {
+                $this->getChild('customer.form.register.telesign.language')->setData('notificationType', key($notificationTypes->getCurrentNotificationType()));
+                echo $this->getChildHtml('customer.form.register.telesign.language');
+            }
+        ?>
     </div>
 </li>
+<script type="text/javascript">
+    jQuery('#telesign_type').on('change', function () {
+        let url = "<?php echo $this->getUrl('sh_telesign/language/notificationLanguage'); ?>", 
+            data = {notification_type: jQuery(this).val()}, 
+            response = jQuery('#notification_both_types_language');
+
+        jQuery('.telesign_message_language').remove();
+        simpleAjaxRequest(url, data, response);
+    })
+</script>

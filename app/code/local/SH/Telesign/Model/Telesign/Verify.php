@@ -29,6 +29,10 @@ class SH_Telesign_Model_Telesign_Verify extends SH_Telesign_Model_Telesign_Core
         $data['extension_template'] = $extensionTemplate ? $extensionTemplate : $data['extension_template'];
         $data['redial'] = $redial ? $redial : $data['redial'];
 
+        if (!empty(Mage::helper('sh_telesign/api_settings')->apiCallTextToSpeechTemplate())) {
+            $data['tts_message'] = Mage::helper('sh_telesign/api_settings')->apiCallTextToSpeechTemplate();
+        }
+
         return $this->verify($telephone, $verifyCode, 'call', $data);
     }
 
@@ -39,18 +43,17 @@ class SH_Telesign_Model_Telesign_Verify extends SH_Telesign_Model_Telesign_Core
      * @param $telephone
      * @param string $verifyCode
      * @param string $language
-     * @param string $template
      * @return mixed
      */
-    public function sms($telephone, $verifyCode = '', $language = '', $template = '')
+    public function sms($telephone, $verifyCode = '', $language = '')
     {
         $data = array();
 
         if (!empty($language)) {
-            $more['language'] = $language;
+            $data['language'] = $language;
         }
-        if (!empty($template)) {
-            $more['template'] = $template;
+        if (!empty(Mage::helper('sh_telesign/api_settings')->apiSmsTemplate())) {
+            $data['template'] = Mage::helper('sh_telesign/api_settings')->apiSmsTemplate();
         }
         return $this->verify($telephone, $verifyCode, 'sms', $data);
     }
