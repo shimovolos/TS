@@ -231,5 +231,46 @@
                 </call_settings>
             </groups>
         </sh_telesign_api>
+        <sh_telesign_admin_settgins translate="label" module="sh_telesign">
+                <label>Admin Settings</label>
+                <tab>sh_telesign</tab>
+                <show_in_default>1</show_in_default>
+                <show_in_website>1</show_in_website>
+                <show_in_store>1</show_in_store>
+                <sort_order>2</sort_order>
+                <groups>
+                    <general translate="label" module="sh_telesign">
+                        <label>General</label>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <sort_order>0</sort_order>
+                        <expanded>1</expanded>
+                        <fields>
+                            <enable_data_grids translate="label" module="sh_telesign">
+                                <label>Enable Data Grids on Admin Panel</label>
+                                <validate>required-entry</validate>
+                                <sort_order>1</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                                <frontend_type>select</frontend_type>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                            </enable_data_grids>
+                            <enable_telephone_base_data_grid translate="label" module="sh_telesign">
+                                <label>Enable Telephone Base Data Grid</label>
+                                <validate>required-entry</validate>
+                                <sort_order>2</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                                <frontend_type>select</frontend_type>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <depends><enable_data_grids>1</enable_data_grids></depends>
+                            </enable_telephone_base_data_grid>
+                        </fields>
+                    </general>
+                </groups>
+        </sh_telesign_admin_settgins>
     </sections>
 </config>

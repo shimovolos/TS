@@ -25,7 +25,9 @@
         </reference>
         <update handle="page_one_column"/>
         <reference name="content">
-            <block type="sh_telesign/resend" name="telesign.resend.verify.code.form" template="customer/address/telesign/resend.phtml"/>
+            <block type="sh_telesign/resend" name="telesign.resend.verify.code.form" template="customer/address/telesign/resend.phtml">
+                <block type="sh_telesign/language" name="customer.form.register.telesign.language" template="persistent/customer/form/telesign/language.phtml"/>
+            </block>
         </reference>
     </sh_telesign_verify_resendform>
     <customer_account_login>

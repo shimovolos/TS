@@ -1,5 +1,24 @@
 <?xml version="1.0"?>
 <config>
+    <menu>
+        <telesign_drids translate="title" module="sh_telesign">
+            <title>SH Telesign</title>
+            <sort_order>90</sort_order>
+            <depends>
+                <config>sh_telesign_admin_settgins/general/enable_data_grids</config>
+            </depends>
+            <children>
+                <telesign_telephone_base translate="title" module="sh_telesign">
+                    <title>Telephone Base</title>
+                    <sort_order>0</sort_order>
+                    <depends>
+                        <config>sh_telesign_admin_settgins/general/enable_telephone_base_data_grid</config>
+                    </depends>
+                    <action>adminhtml/telephone_base/index</action>
+                </telesign_telephone_base>
+            </children>
+        </telesign_drids>
+    </menu>
     <acl>
         <resources>
             <admin>
@@ -16,6 +35,10 @@
                                         <title>Settings</title>
                                         <sort_order>1</sort_order>
                                     </sh_telesign_api>
+                                    <sh_telesign_admin_settgins translate="title">
+                                        <title>Settings</title>
+                                        <sort_order>2</sort_order>
+                                    </sh_telesign_admin_settgins>
                                 </children>
                             </config>
                         </children>

@@ -76,6 +76,9 @@
             <api_languages>
                 <class>SH_Telesign_Helper_Api_Languages</class>
             </api_languages>
+            <admin>
+                <class>SH_Telesign_Helper_Admin_Data</class>
+            </admin>
         </helpers>
         <resources>
             <sh_telesign_setup>
@@ -132,6 +135,17 @@
             </modules>
         </translate>
     </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SH_Telesign before="Mage_Adminhtml">SH_Telesign_Adminhtml</SH_Telesign>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
     <default>
         <sh_telesign_api>
             <sms_settings>
@@ -141,5 +155,11 @@
                 <use_default_tts_message>1</use_default_tts_message>
             </call_settings>
         </sh_telesign_api>
+        <sh_telesign_admin_settgins>
+            <general>
+                <enable_data_grids>1</enable_data_grids>
+                <enable_telephone_base_data_grid>1</enable_telephone_base_data_grid>
+            </general>
+        </sh_telesign_admin_settgins>
     </default>
 </config>

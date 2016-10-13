@@ -20,6 +20,8 @@
                         <input type="text" name="verify_code_new_telephone" id="verify_code_new_telephone" title="<?php echo $this->__('New Telephone') ?>" class="input-text required-entry" disabled/>
                     </div>
                 </div>
+                <?php $this->getChild('customer.form.register.telesign.language')->setData('notificationType', SH_Telesign_Model_System_Config_Source_Type_Notification::TELESIGN_TYPE_CALL); ?>
+                <?php echo $this->getBlockHtml('customer.form.register.telesign.language'); ?>
             </li>
         </ul>
         <p style="font-size: smaller" class="required"><?php echo $this->__('* Please note: If you enter new telephone - this telephone will be set as default'); ?></p>

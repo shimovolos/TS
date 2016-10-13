@@ -24,6 +24,7 @@ class SH_Telesign_Model_Telephone_Base extends Mage_Core_Model_Abstract
 
     /**
      * @param $telephone
+     *
      * @return bool
      */
     public function existTelephone($telephone)
@@ -32,9 +33,9 @@ class SH_Telesign_Model_Telephone_Base extends Mage_Core_Model_Abstract
 
         /** @var $telesignTelephoneBaseCollection SH_Telesign_Model_Resource_Telephone_Base_Collection */
         $telesignTelephoneBaseCollection = $this->getCollection()
-            ->addFieldToFilter('telephone', array('eq' => $telephone));
+            ->addFieldToFilter('telephone', ['eq' => $telephone]);
 
-        if($telesignTelephoneBaseCollection->count() > 0) {
+        if ($telesignTelephoneBaseCollection->count() > 0) {
             $exist = true;
         }
 
