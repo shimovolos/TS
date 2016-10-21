@@ -51,6 +51,11 @@
                     </sh_telesign_risk>
                 </entities>
             </sh_telesign_resource>
+            <core>
+                <rewrite>
+                    <layout>SH_Telesign_Model_Core_Layout</layout>
+                </rewrite>
+            </core>
         </models>
         <blocks>
             <sh_telesign>
