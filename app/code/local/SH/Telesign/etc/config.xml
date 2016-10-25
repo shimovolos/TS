@@ -61,6 +61,11 @@
             <sh_telesign>
                 <class>SH_Telesign_Block</class>
             </sh_telesign>
+            <adminhtml>
+                <rewrite>
+                    <customer_edit_tabs>SH_Telesign_Block_Adminhtml_Customer_Edit_Tabs</customer_edit_tabs>
+                </rewrite>
+            </adminhtml>
         </blocks>
         <helpers>
             <sh_telesign>
@@ -84,13 +89,30 @@
             <admin>
                 <class>SH_Telesign_Helper_Admin_Data</class>
             </admin>
+            <admin_rules_fallback>
+                <class>SH_Telesign_Helper_Admin_Data_Rules_Fallback</class>
+            </admin_rules_fallback>
         </helpers>
         <resources>
             <sh_telesign_setup>
                 <setup>
                     <module>SH_Telesign</module>
+                    <class>SH_Telesign_Model_Resource_Eav_Mysql4_Setup</class>
                 </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
             </sh_telesign_setup>
+            <sh_telesign_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </sh_telesign_write>
+            <sh_telesign_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </sh_telesign_read>
         </resources>
         <events>
             <customer_register_success>
@@ -164,6 +186,7 @@
             <general>
                 <enable_data_grids>1</enable_data_grids>
                 <enable_telephone_base_data_grid>1</enable_telephone_base_data_grid>
+                <enable_telesign_transactions_data_grid>1</enable_telesign_transactions_data_grid>
             </general>
         </sh_telesign_admin_settgins>
     </default>

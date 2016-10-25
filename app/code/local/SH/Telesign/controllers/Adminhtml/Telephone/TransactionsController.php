@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class SH_Telesign_Adminhtml_Telephone_BaseController
+ * Class SH_Telesign_Adminhtml_Telephone_Transactions
  */
-class SH_Telesign_Adminhtml_Telephone_BaseController extends Mage_Adminhtml_Controller_Action
+class SH_Telesign_Adminhtml_Telephone_TransactionsController extends Mage_Adminhtml_Controller_Action
 {
     public function _isAllowed()
     {
@@ -13,22 +13,32 @@ class SH_Telesign_Adminhtml_Telephone_BaseController extends Mage_Adminhtml_Cont
     public function indexAction()
     {
         $this->loadLayout();
-        $this->getLayout()->getBlock('head')->setTitle('Telephone Base');
-        $this->_addContent($this->getLayout()->createBlock('sh_telesign/telephone_base'));
+        $this->getLayout()->getBlock('head')->setTitle('Telesign Transactions');
+        $this->_addContent($this->getLayout()->createBlock('sh_telesign/telephone_transactions'));
         $this->renderLayout();
+    }
+
+    public function gridAction()
+    {
+        $this->getResponse()->setBody(
+            $this->getLayout()
+                ->createBlock('sh_telesign/telephone_transactions')
+                ->setUseAjax(true)
+                ->toHtml()
+        );
     }
 
     public function exportCsvAction()
     {
-        $fileName = 'Telephone Base_export.csv';
-        $content = $this->getLayout()->createBlock('sh_telesign/telephone_base_grid')->getCsv();
+        $fileName = 'Telesign Transactions_export.csv';
+        $content = $this->getLayout()->createBlock('sh_telesign/telephone_transactions_grid')->getCsv();
         $this->_prepareDownloadResponse($fileName, $content);
     }
 
     public function exportExcelAction()
     {
-        $fileName = 'Telephone Base_export.xml';
-        $content = $this->getLayout()->createBlock('sh_telesign/telephone_base_grid')->getExcel();
+        $fileName = 'Telesign Transactions_export.xml';
+        $content = $this->getLayout()->createBlock('sh_telesign/telephone_transactions_grid')->getExcelFile();
         $this->_prepareDownloadResponse($fileName, $content);
     }
 
@@ -36,11 +46,11 @@ class SH_Telesign_Adminhtml_Telephone_BaseController extends Mage_Adminhtml_Cont
     {
         $ids = $this->getRequest()->getParam('ids');
         if (!is_array($ids)) {
-            $this->_getSession()->addError($this->__('Please select Telephone Base(s).'));
+            $this->_getSession()->addError($this->__('Please select Telesign Transactions(s).'));
         } else {
             try {
                 foreach ($ids as $id) {
-                    $model = Mage::getSingleton('sh_telesign/telephone_base')->load($id);
+                    $model = Mage::getSingleton('sh_telesign/transactions')->load($id);
                     $model->delete();
                 }
 
@@ -58,19 +68,19 @@ class SH_Telesign_Adminhtml_Telephone_BaseController extends Mage_Adminhtml_Cont
                 return;
             }
         }
-        $this->_redirect('*/*/index');
+        $this->_redirect('*/*/grid');
     }
 
     public function editAction()
     {
         $id = $this->getRequest()->getParam('id');
-        $model = Mage::getModel('sh_telesign/telephone_base');
+        $model = Mage::getModel('sh_telesign/transactions');
 
         if ($id) {
             $model->load($id);
             if (!$model->getId()) {
                 $this->_getSession()->addError(
-                    Mage::helper('sh_telesign')->__('This Telephone Base no longer exists.')
+                    Mage::helper('sh_telesign')->__('This Telesign Transactions no longer exists.')
                 );
                 $this->_redirect('*/*/');
 
@@ -83,11 +93,11 @@ class SH_Telesign_Adminhtml_Telephone_BaseController extends Mage_Adminhtml_Cont
             $model->setData($data);
         }
 
-        Mage::register('current_model', $model);
+        Mage::register('entity_id', $model);
 
         $this->loadLayout();
-        $this->_addContent($this->getLayout()->createBlock('sh_telesign/telephone_base_edit'));
-        $this->getLayout()->getBlock('head')->setTitle('Edit Telephone Base');
+        $this->_addContent($this->getLayout()->createBlock('sh_telesign/telephone_transactions_edit'));
+        $this->getLayout()->getBlock('head')->setTitle('Edit Telesign Transactions');
         $this->renderLayout();
     }
 
@@ -102,14 +112,14 @@ class SH_Telesign_Adminhtml_Telephone_BaseController extends Mage_Adminhtml_Cont
         if ($data = $this->getRequest()->getPost()) {
 
             $id = $this->getRequest()->getParam('id');
-            $model = Mage::getModel('sh_telesign/telephone_base');
+            $model = Mage::getModel('sh_telesign/transactions');
             if ($id) {
                 $model->load($id);
                 if (!$model->getId()) {
                     $this->_getSession()->addError(
-                        Mage::helper('sh_telesign')->__('This Telephone Base no longer exists.')
+                        Mage::helper('sh_telesign')->__('This Telesign Transactions no longer exists.')
                     );
-                    $this->_redirect('*/*/index');
+                    $this->_redirect('*/*/grid');
 
                     return;
                 }
@@ -122,13 +132,13 @@ class SH_Telesign_Adminhtml_Telephone_BaseController extends Mage_Adminhtml_Cont
                 $model->save();
                 $this->_getSession()->setFormData(false);
                 $this->_getSession()->addSuccess(
-                    Mage::helper('sh_telesign')->__('The Telephone Base has been saved.')
+                    Mage::helper('sh_telesign')->__('The Telesign Transactions has been saved.')
                 );
             } catch (Mage_Core_Exception $e) {
                 $this->_getSession()->addError($e->getMessage());
                 $redirectBack = true;
             } catch (Exception $e) {
-                $this->_getSession()->addError(Mage::helper('sh_telesign')->__('Unable to save the Telephone Base.'));
+                $this->_getSession()->addError(Mage::helper('sh_telesign')->__('Unable to save the Telesign Transactions.'));
                 $redirectBack = true;
                 Mage::logException($e);
             }
@@ -139,7 +149,7 @@ class SH_Telesign_Adminhtml_Telephone_BaseController extends Mage_Adminhtml_Cont
                 return;
             }
         }
-        $this->_redirect('*/*/index');
+        $this->_redirect('*/*/grid');
     }
 
     public function deleteAction()
@@ -147,25 +157,25 @@ class SH_Telesign_Adminhtml_Telephone_BaseController extends Mage_Adminhtml_Cont
         if ($id = $this->getRequest()->getParam('id')) {
             try {
                 // init model and delete
-                $model = Mage::getModel('sh_telesign/telephone_base');
+                $model = Mage::getModel('sh_telesign/transactions');
                 $model->load($id);
                 if (!$model->getId()) {
-                    Mage::throwException(Mage::helper('sh_telesign')->__('Unable to find a Telephone Base to delete.'));
+                    Mage::throwException(Mage::helper('sh_telesign')->__('Unable to find a Telesign Transactions to delete.'));
                 }
                 $model->delete();
                 // display success message
                 $this->_getSession()->addSuccess(
-                    Mage::helper('sh_telesign')->__('The Telephone Base has been deleted.')
+                    Mage::helper('sh_telesign')->__('The Telesign Transactions has been deleted.')
                 );
                 // go to grid
-                $this->_redirect('*/*/index');
+                $this->_redirect('*/*/grid');
 
                 return;
             } catch (Mage_Core_Exception $e) {
                 $this->_getSession()->addError($e->getMessage());
             } catch (Exception $e) {
                 $this->_getSession()->addError(
-                    Mage::helper('sh_telesign')->__('An error occurred while deleting Telephone Base data. Please review log and try again.')
+                    Mage::helper('sh_telesign')->__('An error occurred while deleting Telesign Transactions data. Please review log and try again.')
                 );
                 Mage::logException($e);
             }
@@ -176,9 +186,9 @@ class SH_Telesign_Adminhtml_Telephone_BaseController extends Mage_Adminhtml_Cont
         }
         // display error message
         $this->_getSession()->addError(
-            Mage::helper('sh_telesign')->__('Unable to find a Telephone Base to delete.')
+            Mage::helper('sh_telesign')->__('Unable to find a Telesign Transactions to delete.')
         );
         // go to grid
-        $this->_redirect('*/*/index');
+        $this->_redirect('*/*/grid');
     }
 }

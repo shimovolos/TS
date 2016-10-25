@@ -4,17 +4,19 @@
  * Class SH_Telesign_Block_Admin_Telephone_Renderer_Customer
  *
  */
-class SH_Telesign_Block_Admin_Telephone_Renderer_Customer extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract
+class SH_Telesign_Block_Admin_Telephone_Renderer_Customer implements Varien_Data_Form_Element_Renderer_Interface
 {
-    public function render(Varien_Object $row)
+    public function render(Varien_Data_Form_Element_Abstract $element)
     {
-        $value = $row->getData($this->getColumn()->getIndex());
+        $id = $element->getEscapedValue();
 
-        $url = $this->getUrl('*/customer/edit', array('id' => $value));
+        $url = Mage::helper('adminhtml')->getUrl('*/customer/edit', ['id' => $id]);
 
-        $customer = Mage::getModel('customer/customer')->load($value);
+        $customer = Mage::getModel('customer/customer')->load($id);
 
-        $link = '<a href="' . $url . '">'. $customer->getName() .'</a>';
+        $link = '<a href="' . $url . '">' . $customer->getName() . '</a>';
+        $link .= '<input hidden name="customer_id" value="' . $id . '"';
+
         return $url ? $link : '';
     }
 }

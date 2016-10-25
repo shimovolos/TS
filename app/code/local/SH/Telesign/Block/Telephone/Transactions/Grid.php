@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class SH_Telesign_Block_Telephone_Base_Grid
+ * Class SH_Telesign_Block_Telephone_Transactions_Grid
  */
-class SH_Telesign_Block_Telephone_Base_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class SH_Telesign_Block_Telephone_Transactions_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 
     public function __construct()
@@ -13,11 +13,12 @@ class SH_Telesign_Block_Telephone_Base_Grid extends Mage_Adminhtml_Block_Widget_
         $this->setDefaultSort('entity_id');
         $this->setDefaultDir('asc');
         $this->setSaveParametersInSession(true);
+        $this->setUseAjax(true);
     }
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('sh_telesign/telephone_base')->getCollection();
+        $collection = Mage::getModel('sh_telesign/transactions')->getCollection();
 
         $selectCountryAttributeId = 'SELECT attribute_id AS country_id FROM eav_attribute WHERE attribute_code = \'country_id\'';
         $collection
@@ -37,6 +38,35 @@ class SH_Telesign_Block_Telephone_Base_Grid extends Mage_Adminhtml_Block_Widget_
         $commonColumns = new SH_Telesign_Block_Telephone_Common();
         $commonColumns->prepareColumns($this);
 
+        $this->addColumnAfter('verify_code',
+            [
+                'header' => $this->__('Verify Code'),
+                'width'  => '50px',
+                'index'  => 'verify_code',
+            ],
+            'notification_type'
+        );
+
+        $this->addColumnAfter('confirm_verify_code',
+            [
+                'header'  => $this->__('Verify Code - Is Confirmed?'),
+                'width'   => '50px',
+                'index'   => 'confirm_verify_code',
+                'type'    => 'options',
+                'options' => Mage::getModel('adminhtml/system_config_source_yesno')->toArray(),
+            ],
+            'notification_type'
+        );
+
+        $this->addColumnAfter('created_at',
+            [
+                'header'  => $this->__('Created At'),
+                'width'   => '50px',
+                'index'   => 'created_at',
+            ],
+            'resend_code'
+        );
+
         $this->addExportType('*/*/exportCsv', $this->__('CSV'));
 
         $this->addExportType('*/*/exportExcel', $this->__('Excel XML'));
@@ -51,13 +81,13 @@ class SH_Telesign_Block_Telephone_Base_Grid extends Mage_Adminhtml_Block_Widget_
 
     protected function _prepareMassaction()
     {
-        $modelPk = Mage::getModel('sh_telesign/telephone_base')->getResource()->getIdFieldName();
+        $modelPk = Mage::getModel('sh_telesign/transactions')->getResource()->getIdFieldName();
         $this->setMassactionIdField($modelPk);
         $this->getMassactionBlock()->setFormFieldName('ids');
-//        $this->getMassactionBlock()->addItem('delete', [
-//            'label' => $this->__('Delete'),
-//            'url'   => $this->getUrl('*/*/massDelete'),
-//        ]);
+        $this->getMassactionBlock()->addItem('delete', [
+            'label' => $this->__('Delete'),
+            'url'   => $this->getUrl('*/*/massDelete'),
+        ]);
 
         return $this;
     }

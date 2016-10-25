@@ -3,7 +3,7 @@
     <menu>
         <telesign_drids translate="title" module="sh_telesign">
             <title>SH Telesign</title>
-            <sort_order>90</sort_order>
+            <sort_order>80</sort_order>
             <depends>
                 <config>sh_telesign_admin_settgins/general/enable_data_grids</config>
             </depends>
@@ -16,13 +16,35 @@
                     </depends>
                     <action>adminhtml/telephone_base/index</action>
                 </telesign_telephone_base>
+                <telesign_transaction_base translate="title" module="sh_telesign">
+                    <title>Telesign Transactions</title>
+                    <sort_order>1</sort_order>
+                    <depends>
+                        <config>sh_telesign_admin_settgins/general/enable_telesign_transactions_data_grid</config>
+                    </depends>
+                    <action>adminhtml/telephone_transactions/index</action>
+                </telesign_transaction_base>
             </children>
         </telesign_drids>
     </menu>
     <acl>
         <resources>
+            <all>
+                <title>SH Telesign</title>
+            </all>
             <admin>
                 <children>
+                    <telesign_drids>
+                        <title>SH Telesign</title>
+                        <children>
+                            <telesign_telephone_base>
+                                <title>Telephone Base</title>
+                            </telesign_telephone_base>
+                            <telesign_transaction_base>
+                                <title>Telesign Transactions</title>
+                            </telesign_transaction_base>
+                        </children>
+                    </telesign_drids>
                     <system>
                         <children>
                             <config>

@@ -4,7 +4,6 @@ class SH_Telesign_Block_Telephone_Base_Edit extends Mage_Adminhtml_Block_Widget_
 {
     public function __construct()
     {
-        // $this->_objectId = 'id';
         parent::__construct();
         $this->_blockGroup      = 'sh_telesign';
         $this->_controller      = 'telephone_base';

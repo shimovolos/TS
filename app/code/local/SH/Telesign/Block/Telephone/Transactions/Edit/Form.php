@@ -1,11 +1,14 @@
 <?php
 
-class SH_Telesign_Block_Telephone_Base_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
+/**
+ * Class SH_Telesign_Block_Telephone_Transactions_Edit_Form
+ */
+class SH_Telesign_Block_Telephone_Transactions_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
 
     protected function _getModel()
     {
-        return Mage::registry('current_model');
+        return Mage::registry('entity_id');
     }
 
     protected function _getHelper()
@@ -15,7 +18,7 @@ class SH_Telesign_Block_Telephone_Base_Edit_Form extends Mage_Adminhtml_Block_Wi
 
     protected function _getModelTitle()
     {
-        return 'Telephone Base';
+        return 'Telesign Transactions';
     }
 
     protected function _prepareForm()
@@ -40,7 +43,6 @@ class SH_Telesign_Block_Telephone_Base_Edit_Form extends Mage_Adminhtml_Block_Wi
             ]);
         }
 
-
         $customer = $fieldset->addField('customer_id', 'label', [
             'name'  => 'customer_id',
             'label' => $this->__('Customer'),
@@ -55,7 +57,6 @@ class SH_Telesign_Block_Telephone_Base_Edit_Form extends Mage_Adminhtml_Block_Wi
             'label' => $this->__('Telephone'),
             'title' => $this->__('Telephone'),
             'style' => 'width:100%',
-            'readonly' => true,
         ]);
 
         $fieldset->addField('notification_type', 'select', [
@@ -64,9 +65,21 @@ class SH_Telesign_Block_Telephone_Base_Edit_Form extends Mage_Adminhtml_Block_Wi
             'title'  => $this->__('Notification Type'),
             'values' => Mage::getModel('sh_telesign/system_config_source_type_notification')
                 ->toArray(SH_Telesign_Model_System_Config_Source_Type_Notification::TELESIGN_TYPE_BOTH),
-            'disabled' => true,
         ]);
 
+        $fieldset->addField('verify_code', 'text', [
+            'name'     => 'verify_code',
+            'label'    => $this->__('Verify Code'),
+            'title'    => $this->__('Verify Code'),
+            'readonly' => true,
+        ]);
+
+        $fieldset->addField('confirm_verify_code', 'select', [
+            'name'   => 'confirm_verify_code',
+            'label'  => $this->__('Confirm Verify Code?'),
+            'title'  => $this->__('Confirm Verify Code?'),
+            'values' => Mage::getModel('adminhtml/system_config_source_yesno')->toArray(),
+        ]);
 
         if ($model) {
             $form->setValues($model->getData());

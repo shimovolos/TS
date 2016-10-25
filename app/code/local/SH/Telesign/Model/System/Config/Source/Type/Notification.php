@@ -5,9 +5,9 @@
  */
 class SH_Telesign_Model_System_Config_Source_Type_Notification
 {
-    const TELESIGN_TYPE_SMS = 0;
-    const TELESIGN_TYPE_CALL = 1;
-    const TELESIGN_TYPE_BOTH = 2;
+    const TELESIGN_TYPE_SMS                = 0;
+    const TELESIGN_TYPE_CALL               = 1;
+    const TELESIGN_TYPE_BOTH               = 2;
     const TELESIGN_TYPE_PHONE_VERIFICATION = 3;
 
     /**
@@ -17,25 +17,33 @@ class SH_Telesign_Model_System_Config_Source_Type_Notification
      */
     public function toOptionArray()
     {
-        return array(
-            array('value' => self::TELESIGN_TYPE_SMS, 'label' => Mage::helper('sh_telesign')->__('SMS')),
-            array('value' => self::TELESIGN_TYPE_CALL, 'label' => Mage::helper('sh_telesign')->__('Call')),
-            array('value' => self::TELESIGN_TYPE_BOTH, 'label' => Mage::helper('sh_telesign')->__('Available Both types')),
-        );
+        return [
+            ['value' => self::TELESIGN_TYPE_SMS, 'label' => Mage::helper('sh_telesign')->__('SMS')],
+            ['value' => self::TELESIGN_TYPE_CALL, 'label' => Mage::helper('sh_telesign')->__('Call')],
+            ['value' => self::TELESIGN_TYPE_BOTH, 'label' => Mage::helper('sh_telesign')->__('Available Both types')],
+        ];
     }
 
     /**
      * Get options in "key-value" format
      *
+     * @param $exclude
+     *
      * @return array
      */
-    public function toArray()
+    public function toArray($exclude)
     {
-        return array(
-            self::TELESIGN_TYPE_SMS => Mage::helper('sh_telesign')->__('SMS'),
+        $types = [
+            self::TELESIGN_TYPE_SMS  => Mage::helper('sh_telesign')->__('SMS'),
             self::TELESIGN_TYPE_CALL => Mage::helper('sh_telesign')->__('Call'),
             self::TELESIGN_TYPE_BOTH => Mage::helper('sh_telesign')->__('Available Both types'),
-        );
+        ];
+
+        if($exclude) {
+            unset($types[$exclude]);
+        }
+
+        return $types;
     }
 
     /**
@@ -45,14 +53,14 @@ class SH_Telesign_Model_System_Config_Source_Type_Notification
     {
         $currentNotificationType = Mage::getStoreConfig('sh_telesign_settings/general/notification_type');
         $optionArray = $this->toArray();
-        $currentNotificationTypeArray = array();
+        $currentNotificationTypeArray = [];
 
-        if($currentNotificationType == self::TELESIGN_TYPE_BOTH) {
+        if ($currentNotificationType == self::TELESIGN_TYPE_BOTH) {
             unset($optionArray[self::TELESIGN_TYPE_BOTH]);
             $currentNotificationTypeArray = $optionArray;
-        } elseif($currentNotificationType == self::TELESIGN_TYPE_CALL) {
+        } elseif ($currentNotificationType == self::TELESIGN_TYPE_CALL) {
             $currentNotificationTypeArray[self::TELESIGN_TYPE_CALL] = $optionArray[self::TELESIGN_TYPE_CALL];
-        } elseif($currentNotificationType == self::TELESIGN_TYPE_SMS) {
+        } elseif ($currentNotificationType == self::TELESIGN_TYPE_SMS) {
             $currentNotificationTypeArray[self::TELESIGN_TYPE_SMS] = $optionArray[self::TELESIGN_TYPE_SMS];
         }
 

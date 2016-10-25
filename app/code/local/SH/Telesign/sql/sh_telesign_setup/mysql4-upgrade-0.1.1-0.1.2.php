@@ -102,6 +102,9 @@ if(!$installer->getConnection()->isTableExists('sh_telesign_telephone_base')) {
         ->addForeignKey($installer->getFkName('sh_telesign_telephone_base', 'telephone', 'sh_telesign_transactions', 'telephone'),
             'telephone', 'sh_telesign_transactions', 'telephone',
             Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE)
+        ->addForeignKey($installer->getFkName('sh_telesign_telephone_base', 'notification_type', 'sh_telesign_transactions', 'notification_type'),
+            'notification_type', 'sh_telesign_transactions', 'notification_type',
+            Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE)
         ->setComment('Telesign Telephone Base Table');
     $installer->getConnection()->createTable($table);
 }
