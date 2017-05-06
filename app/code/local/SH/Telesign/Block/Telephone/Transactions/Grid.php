@@ -64,7 +64,7 @@ class SH_Telesign_Block_Telephone_Transactions_Grid extends Mage_Adminhtml_Block
                 'width'   => '50px',
                 'index'   => 'created_at',
             ],
-            'resend_code'
+            'verify_code'
         );
 
         $this->addExportType('*/*/exportCsv', $this->__('CSV'));

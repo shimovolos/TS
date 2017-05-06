@@ -10,14 +10,6 @@ class SH_Telesign_Block_Telephone_Common extends Mage_Adminhtml_Block_Widget_Gri
      */
     public function prepareColumns($parent)
     {
-        $parent->addColumn('entity_id',
-            [
-                'header' => $parent->__('ID'),
-                'width'  => '50px',
-                'index'  => 'entity_id',
-            ]
-        );
-
         $parent->addColumn('customer_id',
             [
                 'header'                    => $parent->__('Customer'),

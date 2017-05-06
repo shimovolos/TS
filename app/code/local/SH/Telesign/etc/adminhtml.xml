@@ -17,13 +17,18 @@
                     <action>adminhtml/telephone_base/index</action>
                 </telesign_telephone_base>
                 <telesign_transaction_base translate="title" module="sh_telesign">
-                    <title>Telesign Transactions</title>
+                    <title>Transactions</title>
                     <sort_order>1</sort_order>
                     <depends>
                         <config>sh_telesign_admin_settgins/general/enable_telesign_transactions_data_grid</config>
                     </depends>
                     <action>adminhtml/telephone_transactions/index</action>
                 </telesign_transaction_base>
+                <telesign_settings>
+                    <title>Settings</title>
+                    <sort_order>2</sort_order>
+                    <action>adminhtml/system_config/edit/section/sh_telesign_api</action>
+                </telesign_settings>
             </children>
         </telesign_drids>
     </menu>
